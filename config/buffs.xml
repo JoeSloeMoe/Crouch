@@ -43,7 +43,9 @@
 			</effect_group>
 			<!--add or remove the stamina buff for ADS-->
 			<effect_group>
-				<triggered_effect trigger="onSelfAimingGunStart" action="AddBuff" buff="buffCrouchAimingStamina"/>
+				<triggered_effect trigger="onSelfAimingGunStart" action="AddBuff" buff="buffCrouchAimingStamina">
+					<requirement name="!HasBuff" buff="buffCrouchAimingStamina"/>
+				</triggered_effect>
 				<triggered_effect trigger="onSelfAimingGunStop" action="RemoveBuff" buff="buffCrouchAimingStamina"/> 
 			</effect_group>
 			<!--end crouching code-->
