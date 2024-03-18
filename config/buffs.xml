@@ -1,0 +1,61 @@
+<configs>
+	
+	<append xpath="/buffs">
+		<!-- this buff reduces stamina usage for ranged weapons while crouch ADS.
+			This is called by buffCrouchAimingEffects when the player start aiming down the weapon sights.
+			It is removed by buffCrouchAimingEffects when the player stops aiming down the weapon sights.
+			
+			The 'stamina loss reduction' is actually INCREASING player stamina regen (StaminaChangeOT) by 20% 
+			which in turn slows stamina loss down when ADS. 
+			So the actual reduction amount will depend on any other stamina effects the player might have active as well.-->
+		<buff name="buffCrouchAimingStamina" hidden="true" >
+			<stack_type value="ignore"/>
+			<duration value="0"/>
+			<effect_group>
+				<requirement name="CVarCompare" cvar="_crouching" operation="Equals" value="1"/>
+				<requirement name="HoldingItemHasTags" tags="weapon,ranged"/>
+					<passive_effect name="StaminaChangeOT" operation="perc_add" value=".5" />
+			</effect_group>
+		</buff>
+	
+		
+		<!-- this buff will apply stabilisation effects on any ranged weapon when crouched-->
+		<buff name="buffCrouchAimingEffects" hidden="true" >
+			<stack_type value="replace"/>
+			<duration value="0"/>
+			<!--
+				Crouching improves ranged weapon aiming and handling etc. It also cuts down on stamin usage when aiming down sights
+			-->
+			
+			<effect_group>
+				<requirement name="CVarCompare" cvar="_crouching" operation="Equals" value="1"/>
+				<requirement name="HoldingItemHasTags" tags="weapon,ranged"/>
+					<passive_effect name="WeaponHandling" operation="perc_add" value=".13"/> <!--same as forgrip-->
+					<passive_effect name="SpreadMultiplierCrouching" operation="perc_add" value="-.15"/><!--same as forgrip-->
+					<passive_effect name="SpreadMultiplierAiming" operation="perc_add" value="-.08"/> <!--same as bipod-->				
+					<passive_effect name="DamageFalloffRange" operation="perc_add" value=".1"/> <!--1/2 of gun barrel extender-->
+					<passive_effect name="MaxRange" operation="perc_add" value=".1"/><!--1/2 of gun barrel extender-->
+					<!--kickback same as forgrip-->
+					<passive_effect name="KickDegreesVerticalMin" operation="perc_add" value="-.5"/>
+					<passive_effect name="KickDegreesVerticalMax" operation="perc_add" value="-.5"/>
+					<passive_effect name="KickDegreesHorizontalMin" operation="perc_add" value="-.5"/>
+					<passive_effect name="KickDegreesHorizontalMax" operation="perc_add" value="-.5"/>				
+			</effect_group>
+			<!--add or remove the stamina buff for ADS-->
+			<effect_group>
+				<triggered_effect trigger="onSelfAimingGunStart" action="AddBuff" buff="buffCrouchAimingStamina"/>
+				<triggered_effect trigger="onSelfAimingGunStop" action="RemoveBuff" buff="buffCrouchAimingStamina"/> 
+			</effect_group>
+			<!--end crouching code-->
+		</buff>
+	</append>
+	
+	<!--add the Crouching  buff as a background buff to run continually - it is stateless so no issues-->
+	<append xpath="/buffs/buff[@name='buffStatusCheck01']">
+		<effect_group>
+			<requirement name="!HasBuff" buff="buffCrouchAimingEffects"/>
+				<triggered_effect trigger="onSelfBuffUpdate" action="AddBuff" buff="buffCrouchAimingEffects"/>
+		</effect_group>
+	</append>
+	
+</configs>

@@ -1,0 +1,16 @@
+CrouchAimingRevisited - Crouch effects 7DTD XML mod.
+JoeSloeMoe
+
+1.0.1  17th March 2024
+
+Crouching steadies your aim.
+Currently 7DTD treats weapon handling the same whether a player is standing or crouching. This mod adds some basic
+stabilisation effects that you might normaly expect to see from crouch firing.
+
+  Added ranged weapon effects when Crouching : 
+		Increases: max range 10%, Weapons Handling 13%. 
+		Reduces: Spread Multiplier 15%, Kickback 5%, ADS Stamina cost reduction.
+
+  Note: ADS 'stamina reduction' is actually INCREASING player stamina regen by 20% which in turn slows stamina loss down when ADS. 
+        So the actual reduction amount will depend on any other stamina effects the player might have active as well.
+  
