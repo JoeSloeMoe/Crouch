@@ -1,5 +1,5 @@
 CrouchAimingRevisited - Crouch effects 7DTD XML mod.
-JoeSloeMoe
+JoeSloeMoe  https://github.com/JoeSloeMoe/Crouch
 
 1.0.1  17th March 2024
 
@@ -14,3 +14,5 @@ stabilisation effects that you might normaly expect to see from crouch firing.
   Note: ADS 'stamina reduction' is actually INCREASING player stamina regen by 20% which in turn slows stamina loss down when ADS. 
         So the actual reduction amount will depend on any other stamina effects the player might have active as well.
   
+1.0.2 18th April 2024
+   - Linux pathing compatability fix
