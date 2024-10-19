@@ -16,3 +16,7 @@ stabilisation effects that you might normaly expect to see from crouch firing.
   
 1.0.2 18th April 2024
    - Linux pathing compatability fix
+
+1.1.0 19th Oct 2024
+   - 7DTD v1.x compatible update.
+   - Slightly decreased stamina loss when crouched.
